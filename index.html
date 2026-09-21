@@ -14,11 +14,7 @@ body{display:flex;justify-content:center;align-items:center}
 .app{width:100%;max-width:393px;height:100%;max-height:852px;background:var(--bg);position:relative;display:flex;flex-direction:column;overflow:hidden}
 @media(max-width:420px){.app{max-width:100%;max-height:100%}}
 
-/* Status bar */
-.sb{height:44px;padding:14px 20px 0;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:700;flex-shrink:0;z-index:10}
-.sb.dark{color:#fff;background:var(--red2)}
-.sb.light{color:var(--text);background:var(--bg)}
-.sb-r{font-size:12px;font-weight:600}
+.sb{display:none}
 
 .scr-wrap{flex:1;display:grid;overflow:hidden;min-height:0}
 .scr{grid-area:1/1;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;transition:transform .25s cubic-bezier(.4,0,.2,1),opacity .25s}
@@ -26,63 +22,49 @@ body{display:flex;justify-content:center;align-items:center}
 .scr.off{transform:translateX(100%);opacity:0;pointer-events:none;overflow:hidden}
 .scr.back{transform:translateX(-15%);opacity:0;pointer-events:none;overflow:hidden}
 
-/* ===== BOTTOM NAV 5-item with center SOS ===== */
-.bnav{display:flex;align-items:flex-end;background:var(--bg);border-top:1px solid var(--divider);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0);position:relative}
-.bnav .ni{flex:1;background:none;border:none;color:var(--text3);font-family:inherit;font-size:9px;font-weight:600;padding:8px 0 10px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:color .15s}
+/* BOTTOM NAV — smaller, SOS bigger */
+.bnav{display:flex;align-items:flex-end;background:var(--bg);border-top:1px solid var(--divider);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0);position:relative;height:48px}
+.bnav .ni{flex:1;background:none;border:none;color:var(--text3);font-family:inherit;font-size:8px;font-weight:600;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;transition:color .15s;height:100%}
 .bnav .ni.on{color:var(--red)}
-.bnav .ni svg{width:22px;height:22px}
-.bnav .ni-sos{flex:1;display:flex;flex-direction:column;align-items:center;gap:0;background:none;border:none;cursor:pointer;padding:0 0 10px;font-family:inherit;position:relative;top:-12px}
-.bnav .ni-sos .sos-circle{width:52px;height:52px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px var(--red-glow);transition:transform .1s}
+.bnav .ni svg{width:18px;height:18px}
+.bnav .ni-sos{flex:1;display:flex;flex-direction:column;align-items:center;background:none;border:none;cursor:pointer;padding:0;font-family:inherit;position:relative;top:-12px;gap:0}
+.bnav .ni-sos .sos-circle{width:62px;height:62px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px var(--red-glow);transition:transform .1s;border:3px solid var(--bg)}
 .bnav .ni-sos:active .sos-circle{transform:scale(.9)}
-.bnav .ni-sos .sos-circle svg{width:24px;height:24px;fill:#fff}
-.bnav .ni-sos span{font-size:9px;font-weight:700;color:var(--red);margin-top:4px}
+.bnav .ni-sos .sos-circle svg{width:28px;height:28px;fill:#fff}
+.bnav .ni-sos span{font-size:8px;font-weight:700;color:var(--red);margin-top:2px}
 
-/* ===== HOME ===== */
+/* HOME */
 .home{background:var(--bg);position:relative}
 .home::before{content:'';position:absolute;top:0;left:0;right:0;height:280px;background:var(--red);z-index:0;border-radius:0 0 28px 28px;pointer-events:none}
 
-/* Red header */
-.hdr{background:transparent;color:#fff;padding:0 20px 20px;position:relative;z-index:1}
-.hdr::after{content:'';position:absolute;right:-40px;top:-40px;width:160px;height:160px;background:rgba(255,255,255,.04);border-radius:50%}
-.hdr-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.hdr{background:transparent;color:#fff;padding:16px 20px 16px;position:relative;z-index:1}
+.hdr::after{content:'';position:absolute;right:-40px;top:-40px;width:160px;height:160px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none}
+.hdr-row{display:flex;align-items:center;gap:12px}
 .hdr-av{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0;border:2px solid rgba(255,255,255,.3)}
 .hdr-info{flex:1}
 .hdr-name{font-size:16px;font-weight:800}
 .hdr-sub{font-size:11px;opacity:.7;margin-top:1px}
-.hdr-notif{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.hdr-notif{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;z-index:2}
 .hdr-notif svg{width:18px;height:18px;fill:#fff}
 .hdr-dot{width:7px;height:7px;background:#FBBF24;border-radius:50%;position:absolute;top:6px;right:7px;border:1.5px solid var(--red)}
 
-/* Search */
-.hdr-search{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.15);border-radius:12px;padding:10px 14px;cursor:pointer}
-.hdr-search svg{width:16px;height:16px;fill:rgba(255,255,255,.6);flex-shrink:0}
-.hdr-search span{font-size:12px;color:rgba(255,255,255,.6)}
-
-/* KBRI strip */
-.kbri{margin:14px 20px 0;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.15);border-radius:12px;padding:12px 14px;cursor:pointer;position:relative;z-index:1}
-.kbri-ico{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.kbri-ico svg{width:16px;height:16px;fill:#fff}
-.kbri-info{flex:1}
-.kbri-t{font-size:11px;font-weight:700;color:#fff}
-.kbri-d{font-size:10px;color:rgba(255,255,255,.7);margin-top:1px}
-.kbri-btn{font-size:10px;font-weight:700;color:#fff}
-
-/* Service icons - 2 rows like Gojek/Tel-U */
-.svc-sec{padding:16px 16px 0;margin:14px 12px 0;background:var(--bg);border-radius:16px;position:relative;z-index:1;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.svc-label{font-size:14px;font-weight:800;color:var(--text);margin-bottom:16px}
-.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 8px;margin-bottom:16px}
-.svc-item{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer}
-.svc-item:active .svc-ico{transform:scale(.9)}
-.svc-ico{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;transition:transform .12s;position:relative;border:1.5px solid var(--divider)}
-.svc-ico canvas,.svc-ico svg{width:30px;height:30px}
-.svc-pro{position:absolute;top:-4px;right:-4px;font-size:7px;font-weight:800;background:var(--amber);color:#fff;padding:1px 5px;border-radius:3px}
-.svc-name{font-size:10px;font-weight:600;color:var(--text);text-align:center;line-height:1.25}
+/* Service card on home */
+.svc-sec{padding:16px;margin:14px 12px 0;background:var(--bg);border-radius:16px;position:relative;z-index:1;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.svc-label{font-size:14px;font-weight:800;color:var(--text);margin-bottom:14px}
+.svc-list{display:flex;flex-direction:column;gap:10px}
+.svc-row{display:flex;align-items:center;gap:14px;padding:14px;background:var(--bg2);border-radius:14px;cursor:pointer;transition:transform .12s}
+.svc-row:active{transform:scale(.98)}
+.svc-row-ico{width:48px;height:48px;border-radius:14px;background:#FDF2F2;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.svc-row-ico svg{width:26px;height:26px}
+.svc-row-info{flex:1}
+.svc-row-name{font-size:13px;font-weight:700;color:var(--text)}
+.svc-row-desc{font-size:11px;color:var(--text2);margin-top:2px}
+.svc-row-arr svg{width:16px;height:16px;fill:var(--text3)}
 
 /* Banner slider */
-.banner-sec{padding:8px 20px 0;position:relative;z-index:1}
-.banner-sec-label{font-size:14px;font-weight:800;color:var(--text);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
-.banner-sec-label span{font-size:11px;font-weight:600;color:var(--red);cursor:pointer}
-.banner-wrap{position:relative;overflow:hidden;border-radius:14px;margin-bottom:10px}
+.sec-label{padding:20px 20px 0;font-size:14px;font-weight:800;color:var(--text);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.sec-label span{font-size:11px;font-weight:600;color:var(--red);cursor:pointer}
+.banner-wrap{position:relative;overflow:hidden;border-radius:14px;margin:12px 20px 0;z-index:1}
 .banner-track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1)}
 .banner-slide{min-width:100%;position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/8}
 .banner-slide-bg{position:absolute;inset:0;display:flex;align-items:center}
@@ -91,12 +73,12 @@ body{display:flex;justify-content:center;align-items:center}
 .banner-slide-tag{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.7;margin-bottom:6px}
 .banner-slide-h{font-size:16px;font-weight:800;line-height:1.25;margin-bottom:4px}
 .banner-slide-p{font-size:11px;opacity:.7;line-height:1.4;max-width:70%}
-.banner-dots{display:flex;justify-content:center;gap:6px;padding-bottom:12px}
+.banner-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 4px}
 .banner-dots span{width:6px;height:6px;border-radius:50%;background:var(--divider);transition:all .2s}
 .banner-dots span.on{width:18px;border-radius:3px;background:var(--red)}
 
-/* Info cards */
-.info-scroll{display:flex;gap:10px;padding:0 20px 16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+/* Info cards horizontal */
+.info-scroll{display:flex;gap:10px;padding:12px 20px 0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
 .info-scroll::-webkit-scrollbar{display:none}
 .info-card{min-width:260px;border-radius:16px;padding:18px;color:#fff;scroll-snap-align:start;position:relative;overflow:hidden}
 .info-card::after{content:'';position:absolute;right:-20px;bottom:-20px;width:80px;height:80px;background:rgba(255,255,255,.06);border-radius:50%}
@@ -104,15 +86,7 @@ body{display:flex;justify-content:center;align-items:center}
 .info-h{font-size:14px;font-weight:800;line-height:1.3;margin-bottom:4px}
 .info-p{font-size:11px;opacity:.65;line-height:1.4}
 
-/* User status card */
-.usr-card{margin:0 20px 16px;background:var(--bg2);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px}
-.usr-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800;flex-shrink:0}
-.usr-info{flex:1}
-.usr-name{font-size:13px;font-weight:700;color:var(--text)}
-.usr-sub{font-size:10px;color:var(--text3);margin-top:1px}
-.usr-badge{font-size:9px;font-weight:700;padding:4px 8px;border-radius:6px;background:var(--green-light);color:var(--green)}
-
-/* ===== PANIC ===== */
+/* PANIC */
 .pa{background:#111318!important;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 24px;color:#fff}
 .pa-icon{width:88px;height:88px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:24px;animation:pap 1.2s ease-in-out infinite}
 @keyframes pap{0%,100%{box-shadow:0 0 0 0 var(--red-glow)}50%{box-shadow:0 0 0 24px rgba(196,30,36,0)}}
@@ -132,29 +106,48 @@ body{display:flex;justify-content:center;align-items:center}
 .back-btn{width:34px;height:34px;border-radius:10px;background:var(--bg2);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .12s}
 .back-btn:active{background:var(--divider)}
 .back-btn svg{width:18px;height:18px;fill:var(--text)}
+.back-svg{viewBox:0 0 24 24}
 
-/* ===== LAYANAN ===== */
+/* LAYANAN detail screens */
 .lay{background:var(--bg)}
-.lay-head{padding:16px 20px;position:sticky;top:0;background:var(--bg);z-index:5;display:flex;align-items:center;gap:12px}
+.lay-head{padding:14px 20px;position:sticky;top:0;background:var(--bg);z-index:5;display:flex;align-items:center;gap:12px}
 .lay-head h2{font-size:20px;font-weight:800;color:var(--text)}
 .lay-body{padding:0 20px 20px}
-.lay-cat{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 10px}
-.lay-cat:first-child{margin-top:0}
-.lay-list{display:flex;flex-direction:column;gap:6px}
-.lay-row{background:var(--bg2);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .12s}
-.lay-row:active{transform:scale(.98)}
-.lay-row-ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.lay-row-info{flex:1}
-.lay-row-name{font-size:13px;font-weight:700;color:var(--text)}
-.lay-row-desc{font-size:11px;color:var(--text2);margin-top:2px}
-.lay-row-tag{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:4px}
-.lay-row-tag.na{background:var(--blue-light);color:var(--blue)}
-.lay-row-tag.wa{background:var(--green-light);color:var(--green)}
-.lay-arr svg{width:16px;height:16px;fill:var(--text3)}
 
-/* ===== BERITA ===== */
+/* Forms */
+.form-group{margin-bottom:14px}
+.form-label{font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;display:block}
+.form-input{width:100%;padding:12px 14px;border:1.5px solid var(--divider);border-radius:10px;font-family:inherit;font-size:13px;color:var(--text);background:var(--bg);outline:none;transition:border .15s}
+.form-input:focus{border-color:var(--red)}
+textarea.form-input{min-height:100px;resize:vertical}
+.form-btn{width:100%;padding:14px;background:var(--red);color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:opacity .12s}
+.form-btn:active{opacity:.8}
+.form-note{font-size:11px;color:var(--text3);margin-top:8px;text-align:center}
+
+/* Clinic list */
+.clinic-card{background:var(--bg2);border-radius:14px;padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:transform .12s}
+.clinic-card:active{transform:scale(.98)}
+.clinic-name{font-size:13px;font-weight:700;color:var(--text)}
+.clinic-addr{font-size:11px;color:var(--text2);margin-top:2px}
+.clinic-dist{font-size:11px;font-weight:600;color:var(--green);margin-top:4px}
+.clinic-tag{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--green-light);color:var(--green);margin-left:8px}
+.clinic-specs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.clinic-spec{font-size:9px;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--red-light);color:var(--red)}
+
+/* Hotline list */
+.hotline-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--bg2);border-radius:14px;margin-bottom:8px;cursor:pointer;transition:transform .12s}
+.hotline-row:active{transform:scale(.98)}
+.hotline-ico{width:42px;height:42px;border-radius:12px;background:#FDF2F2;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hotline-ico svg{width:20px;height:20px;fill:#C41E24}
+.hotline-info{flex:1}
+.hotline-name{font-size:13px;font-weight:700;color:var(--text)}
+.hotline-num{font-size:11px;color:var(--text2);margin-top:2px}
+.hotline-call{width:34px;height:34px;border-radius:10px;background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hotline-call svg{width:16px;height:16px;fill:#059669}
+
+/* BERITA */
 .news{background:var(--bg)}
-.news-head{padding:16px 20px;position:sticky;top:0;background:var(--bg);z-index:5;display:flex;align-items:center;gap:12px}
+.news-head{padding:14px 20px;position:sticky;top:0;background:var(--bg);z-index:5;display:flex;align-items:center;gap:12px}
 .news-head h2{font-size:20px;font-weight:800;color:var(--text)}
 .news-tabs{display:flex;gap:6px;padding:0 20px 14px;overflow-x:auto}
 .news-tabs::-webkit-scrollbar{display:none}
@@ -169,9 +162,9 @@ body{display:flex;justify-content:center;align-items:center}
 .news-h{font-size:13px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .news-meta{font-size:11px;color:var(--text3)}
 
-/* ===== PROFIL ===== */
+/* PROFIL */
 .prof{background:var(--bg2)}
-.prof-top{padding:8px 20px 20px;background:var(--bg)}
+.prof-top{padding:14px 20px 20px;background:var(--bg)}
 .prof-top-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .prof-top-head h2{font-size:20px;font-weight:800;color:var(--text)}
 .prof-top-center{text-align:center}
@@ -191,8 +184,30 @@ body{display:flex;justify-content:center;align-items:center}
 .prof-row-v{font-size:11px;color:var(--text3);margin-top:1px}
 .prof-row-arr svg{width:14px;height:14px;fill:var(--text3)}
 .prof-out{margin-top:20px;width:100%;padding:14px;background:var(--bg);border:none;color:var(--red);font-family:inherit;font-size:14px;font-weight:600;border-radius:14px;cursor:pointer}
+.prod-active{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--green);font-weight:600;margin-top:2px}
+.prod-active::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
 
-.toast{position:absolute;bottom:80px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--text);color:#fff;padding:10px 20px;border-radius:10px;font-size:12px;font-weight:600;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap;z-index:99}
+.toast{position:absolute;bottom:70px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--text);color:#fff;padding:10px 20px;border-radius:10px;font-size:12px;font-weight:600;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap;z-index:99}
+
+.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.show{opacity:1;pointer-events:auto}
+.modal{background:var(--bg);border-radius:20px;padding:32px 24px;text-align:center;max-width:320px;width:100%;transform:scale(.9);transition:transform .25s cubic-bezier(.4,0,.2,1)}
+.modal-overlay.show .modal{transform:scale(1)}
+.modal-icon{width:64px;height:64px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
+.modal-icon.success{background:var(--green-light)}
+.modal-icon.success svg{width:32px;height:32px;fill:var(--green)}
+.modal-icon.wa{background:#DCF8C6}
+.modal-icon.wa svg{width:32px;height:32px;fill:#25D366}
+.modal-icon.info{background:var(--blue-light)}
+.modal-icon.info svg{width:32px;height:32px;fill:var(--blue)}
+.modal-h{font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px}
+.modal-p{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:20px}
+.modal-ref{background:var(--bg2);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--text);font-weight:600;margin-bottom:16px;display:inline-block}
+.modal-btn{width:100%;padding:13px;border:none;border-radius:12px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .12s}
+.modal-btn:active{opacity:.8}
+.modal-btn.primary{background:var(--red);color:#fff;margin-bottom:8px}
+.modal-btn.green{background:#25D366;color:#fff;margin-bottom:8px}
+.modal-btn.secondary{background:var(--bg2);color:var(--text)}
 </style>
 
 <div class="app">
@@ -201,7 +216,6 @@ body{display:flex;justify-content:center;align-items:center}
   <div class="scr-wrap">
     <!-- HOME -->
     <div class="scr home" id="s-home">
-      <!-- Red header like Tel-U -->
       <div class="hdr">
         <div class="hdr-row">
           <div class="hdr-av">SN</div>
@@ -209,214 +223,118 @@ body{display:flex;justify-content:center;align-items:center}
             <div class="hdr-name">Siti Nurhaliza</div>
             <div class="hdr-sub">Pekerja Migran &bull; TKI-2024-089234</div>
           </div>
-          <div class="hdr-notif" onclick="toast('3 notifikasi baru')">
+          <div class="hdr-notif" onclick="go('notifikasi')">
             <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
             <span class="hdr-dot"></span>
           </div>
         </div>
-        <div class="hdr-search" onclick="toast('Pencarian')">
-          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-          <span>Cari layanan, berita, bantuan...</span>
-        </div>
       </div>
 
-      <!-- KBRI -->
-      <div class="kbri" onclick="toast('Menghubungi KBRI...')">
-        <div class="kbri-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
-        <div class="kbri-info"><div class="kbri-t">Hotline KBRI Malaysia</div><div class="kbri-d">+60 3-2116 4067 &bull; 24 jam</div></div>
-        <div class="kbri-btn">Hubungi &rsaquo;</div>
-      </div>
-
-      <!-- Services grid 2x4 like Gojek -->
+      <!-- 3 Layanan vertical -->
       <div class="svc-sec">
-        <div class="svc-label">Fitur Aplikasi</div>
-        <div class="svc-grid">
-          <!-- Row 1 - custom illustrated icons, single brand color -->
-          <div class="svc-item" onclick="golay('keamanan')">
-            <div class="svc-ico" style="background:#FDF2F2">
+        <div class="svc-label">Layanan</div>
+        <div class="svc-list">
+          <div class="svc-row" onclick="goScreen('konsultasi')">
+            <div class="svc-row-ico">
               <svg viewBox="0 0 40 40" fill="none">
-                <path d="M20 5L8 10v8c0 9 5.1 17.4 12 19.5C26.9 35.4 32 27 32 18v-8L20 5z" fill="#FECACA"/>
-                <path d="M20 7L10 11.2v7.3c0 7.8 4.4 15 10 17 5.6-2 10-9.2 10-17v-7.3L20 7z" fill="#C41E24"/>
-                <path d="M17 20l3 3 5-5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="12" y="4" width="16" height="28" rx="3" fill="#FECACA"/>
+                <rect x="13" y="6" width="14" height="24" rx="2" fill="#C41E24"/>
+                <rect x="17" y="8" width="6" height="1" rx=".5" fill="rgba(255,255,255,.4)"/>
+                <circle cx="20" cy="27" r="1.5" fill="rgba(255,255,255,.5)"/>
+                <rect x="16" y="13" width="8" height="8" rx="1" fill="rgba(255,255,255,.15)"/>
               </svg>
             </div>
-            <div class="svc-name">Keamanan</div>
-          </div>
-          <div class="svc-item" onclick="golay('konsultasi')">
-            <div class="svc-ico" style="background:#FDF2F2">
-              <svg viewBox="0 0 40 40" fill="none">
-                <rect x="6" y="8" width="28" height="20" rx="4" fill="#FECACA"/>
-                <rect x="8" y="10" width="24" height="16" rx="3" fill="#C41E24"/>
-                <circle cx="15" cy="18" r="2" fill="#fff"/>
-                <circle cx="20" cy="18" r="2" fill="#fff"/>
-                <circle cx="25" cy="18" r="2" fill="#fff"/>
-                <path d="M12 28l4-4h12" stroke="#FECACA" stroke-width="2.5" stroke-linecap="round"/>
-              </svg>
-              <span class="svc-pro">PRO</span>
+            <div class="svc-row-info">
+              <div class="svc-row-name">Konsultasi Online</div>
+              <div class="svc-row-desc">Telepon dan chat via WhatsApp</div>
             </div>
-            <div class="svc-name">Konsultasi</div>
+            <span class="svc-row-arr"><svg viewBox="0 0 24 24" fill="#9CA3AF"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span>
           </div>
-          <div class="svc-item" onclick="golay('hukum')">
-            <div class="svc-ico" style="background:#FDF2F2">
+          <div class="svc-row" onclick="goScreen('hukum')">
+            <div class="svc-row-ico">
               <svg viewBox="0 0 40 40" fill="none">
                 <rect x="10" y="6" width="20" height="28" rx="3" fill="#FECACA"/>
                 <rect x="12" y="8" width="16" height="24" rx="2" fill="#C41E24"/>
                 <rect x="15" y="12" width="10" height="2" rx="1" fill="#fff"/>
                 <rect x="15" y="17" width="8" height="2" rx="1" fill="#fff" opacity=".7"/>
                 <rect x="15" y="22" width="10" height="2" rx="1" fill="#fff" opacity=".7"/>
-                <path d="M20 28l-2-2h-1a1 1 0 01-1-1v-1h8v1a1 1 0 01-1 1h-1l-2 2z" fill="#FECACA"/>
               </svg>
-              <span class="svc-pro">PRO</span>
             </div>
-            <div class="svc-name">Hukum</div>
+            <div class="svc-row-info">
+              <div class="svc-row-name">Bantuan Hukum</div>
+              <div class="svc-row-desc">Isi form pengaduan langsung</div>
+            </div>
+            <span class="svc-row-arr"><svg viewBox="0 0 24 24" fill="#9CA3AF"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span>
           </div>
-          <div class="svc-item" onclick="golay('kesehatan')">
-            <div class="svc-ico" style="background:#FDF2F2">
+          <div class="svc-row" onclick="goScreen('kesehatan')">
+            <div class="svc-row-ico">
               <svg viewBox="0 0 40 40" fill="none">
                 <rect x="8" y="8" width="24" height="24" rx="5" fill="#FECACA"/>
                 <rect x="10" y="10" width="20" height="20" rx="4" fill="#C41E24"/>
                 <rect x="18" y="14" width="4" height="12" rx="1" fill="#fff"/>
                 <rect x="14" y="18" width="12" height="4" rx="1" fill="#fff"/>
               </svg>
-              <span class="svc-pro">PRO</span>
             </div>
-            <div class="svc-name">Kesehatan</div>
-          </div>
-
-          <!-- Row 2 -->
-          <div class="svc-item" onclick="toast('Tracking Lokasi')">
-            <div class="svc-ico" style="background:#FDF2F2">
-              <svg viewBox="0 0 40 40" fill="none">
-                <path d="M20 6c-5.5 0-10 4.5-10 10 0 8 10 18 10 18s10-10 10-18c0-5.5-4.5-10-10-10z" fill="#FECACA"/>
-                <path d="M20 8c-4.4 0-8 3.6-8 8 0 6.4 8 14.4 8 14.4s8-8 8-14.4c0-4.4-3.6-8-8-8z" fill="#C41E24"/>
-                <circle cx="20" cy="16" r="3" fill="#fff"/>
-              </svg>
+            <div class="svc-row-info">
+              <div class="svc-row-name">Kesehatan</div>
+              <div class="svc-row-desc">Cari klinik terdekat di wilayah Anda</div>
             </div>
-            <div class="svc-name">Lokasi</div>
-          </div>
-          <div class="svc-item" onclick="toast('Dokumen')">
-            <div class="svc-ico" style="background:#FDF2F2">
-              <svg viewBox="0 0 40 40" fill="none">
-                <path d="M12 8a2 2 0 012-2h8l8 8v18a2 2 0 01-2 2H14a2 2 0 01-2-2V8z" fill="#FECACA"/>
-                <path d="M14 10a1 1 0 011-1h6l6 6v15a1 1 0 01-1 1H15a1 1 0 01-1-1V10z" fill="#C41E24"/>
-                <path d="M22 9v6h6" stroke="#FECACA" stroke-width="1.5"/>
-                <rect x="17" y="19" width="8" height="1.5" rx=".75" fill="#fff" opacity=".8"/>
-                <rect x="17" y="23" width="6" height="1.5" rx=".75" fill="#fff" opacity=".6"/>
-              </svg>
-            </div>
-            <div class="svc-name">Dokumen</div>
-          </div>
-          <div class="svc-item" onclick="toast('Riwayat')">
-            <div class="svc-ico" style="background:#FDF2F2">
-              <svg viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="12" fill="#FECACA"/>
-                <circle cx="20" cy="20" r="10" fill="#C41E24"/>
-                <path d="M20 13v8l5 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="20" cy="20" r="1.5" fill="#fff"/>
-              </svg>
-            </div>
-            <div class="svc-name">Riwayat</div>
-          </div>
-          <div class="svc-item" onclick="toast('Lainnya segera hadir')">
-            <div class="svc-ico" style="background:#FDF2F2">
-              <svg viewBox="0 0 40 40" fill="none">
-                <circle cx="12" cy="20" r="3" fill="#C41E24"/>
-                <circle cx="20" cy="20" r="3" fill="#C41E24"/>
-                <circle cx="28" cy="20" r="3" fill="#C41E24"/>
-              </svg>
-            </div>
-            <div class="svc-name">Lainnya</div>
+            <span class="svc-row-arr"><svg viewBox="0 0 24 24" fill="#9CA3AF"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span>
           </div>
         </div>
       </div>
 
-      <!-- Banner slider -->
-      <div class="banner-sec">
-        <div class="banner-sec-label">Informasi <span onclick="toast('Lihat semua')">Lihat Semua &rsaquo;</span></div>
-        <div class="banner-wrap" id="bwrap">
-          <div class="banner-track" id="btrack">
-            <div class="banner-slide">
-              <div class="banner-slide-bg">
-                <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
-                  <defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7F1D1D"/><stop offset="100%" stop-color="#C41E24"/></linearGradient></defs>
-                  <rect width="400" height="200" fill="url(#bg1)"/>
-                  <circle cx="340" cy="40" r="80" fill="rgba(255,255,255,.04)"/>
-                  <circle cx="360" cy="160" r="50" fill="rgba(255,255,255,.03)"/>
-                  <path d="M280 60l40-20v40z" fill="rgba(255,255,255,.04)"/>
-                  <rect x="300" y="100" width="60" height="60" rx="8" fill="rgba(255,255,255,.05)" transform="rotate(15 330 130)"/>
-                </svg>
-              </div>
-              <div class="banner-slide-content">
-                <div class="banner-slide-tag">Info Penting</div>
-                <div class="banner-slide-h">Aturan Baru Ketenagakerjaan Malaysia 2027</div>
-                <div class="banner-slide-p">Peraturan terbaru untuk pekerja asing yang wajib diketahui</div>
-              </div>
+      <!-- Informasi banner slider -->
+      <div class="sec-label">Informasi <span onclick="go('informasi')">Lihat Semua &rsaquo;</span></div>
+      <div class="banner-wrap" id="bwrap">
+        <div class="banner-track" id="btrack">
+          <div class="banner-slide">
+            <div class="banner-slide-bg">
+              <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+                <defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7F1D1D"/><stop offset="100%" stop-color="#C41E24"/></linearGradient></defs>
+                <rect width="400" height="200" fill="url(#bg1)"/>
+                <circle cx="340" cy="40" r="80" fill="rgba(255,255,255,.04)"/>
+                <circle cx="360" cy="160" r="50" fill="rgba(255,255,255,.03)"/>
+              </svg>
             </div>
-            <div class="banner-slide">
-              <div class="banner-slide-bg">
-                <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
-                  <defs><linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#064E3B"/><stop offset="100%" stop-color="#059669"/></linearGradient></defs>
-                  <rect width="400" height="200" fill="url(#bg2)"/>
-                  <circle cx="50" cy="160" r="70" fill="rgba(255,255,255,.04)"/>
-                  <circle cx="350" cy="30" r="60" fill="rgba(255,255,255,.03)"/>
-                  <rect x="280" y="80" width="80" height="80" rx="40" fill="rgba(255,255,255,.05)"/>
-                </svg>
-              </div>
-              <div class="banner-slide-content">
-                <div class="banner-slide-tag">Kesehatan</div>
-                <div class="banner-slide-h">Klinik Gratis TKI di Kuala Lumpur</div>
-                <div class="banner-slide-p">Daftar lokasi klinik dan cara mengakses layanan kesehatan</div>
-              </div>
+            <div class="banner-slide-content">
+              <div class="banner-slide-tag">Info Penting</div>
+              <div class="banner-slide-h">Aturan Baru Ketenagakerjaan Malaysia 2027</div>
+              <div class="banner-slide-p">Peraturan terbaru untuk pekerja asing</div>
             </div>
-            <div class="banner-slide">
-              <div class="banner-slide-bg">
-                <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
-                  <defs><linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1E3A5F"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs>
-                  <rect width="400" height="200" fill="url(#bg3)"/>
-                  <circle cx="330" cy="50" r="90" fill="rgba(255,255,255,.04)"/>
-                  <path d="M20 180Q60 120 120 150T220 100" stroke="rgba(255,255,255,.06)" stroke-width="3" fill="none"/>
-                  <rect x="310" y="130" width="50" height="50" rx="6" fill="rgba(255,255,255,.04)" transform="rotate(-10 335 155)"/>
-                </svg>
-              </div>
-              <div class="banner-slide-content">
-                <div class="banner-slide-tag">Tips &amp; Panduan</div>
-                <div class="banner-slide-h">Hak-Hak TKI yang Wajib Diketahui</div>
-                <div class="banner-slide-p">Panduan lengkap sebelum berangkat ke Malaysia</div>
-              </div>
+          </div>
+          <div class="banner-slide">
+            <div class="banner-slide-bg">
+              <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+                <defs><linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#064E3B"/><stop offset="100%" stop-color="#059669"/></linearGradient></defs>
+                <rect width="400" height="200" fill="url(#bg2)"/>
+                <circle cx="50" cy="160" r="70" fill="rgba(255,255,255,.04)"/>
+                <rect x="280" y="80" width="80" height="80" rx="40" fill="rgba(255,255,255,.05)"/>
+              </svg>
+            </div>
+            <div class="banner-slide-content">
+              <div class="banner-slide-tag">Kesehatan</div>
+              <div class="banner-slide-h">Klinik Gratis TKI di Kuala Lumpur</div>
+              <div class="banner-slide-p">Daftar lokasi dan cara akses</div>
+            </div>
+          </div>
+          <div class="banner-slide">
+            <div class="banner-slide-bg">
+              <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+                <defs><linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1E3A5F"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs>
+                <rect width="400" height="200" fill="url(#bg3)"/>
+                <circle cx="330" cy="50" r="90" fill="rgba(255,255,255,.04)"/>
+              </svg>
+            </div>
+            <div class="banner-slide-content">
+              <div class="banner-slide-tag">Tips &amp; Panduan</div>
+              <div class="banner-slide-h">Hak-Hak TKI yang Wajib Diketahui</div>
+              <div class="banner-slide-p">Panduan lengkap sebelum berangkat</div>
             </div>
           </div>
         </div>
-        <div class="banner-dots" id="bdots"><span class="on"></span><span></span><span></span></div>
       </div>
-
-      <!-- Quick info cards -->
-      <div class="banner-sec">
-        <div class="banner-sec-label">Berita Terkini</div>
-      </div>
-      <div class="info-scroll">
-        <div class="info-card" style="background:linear-gradient(135deg,#7F1D1D,#C41E24)">
-          <div class="info-label">Keamanan</div>
-          <div class="info-h">Cara Menggunakan Panic Button</div>
-          <div class="info-p">Panduan lengkap fitur darurat</div>
-        </div>
-        <div class="info-card" style="background:linear-gradient(135deg,#064E3B,#059669)">
-          <div class="info-label">Kesehatan</div>
-          <div class="info-h">Klinik Gratis TKI di Selangor</div>
-          <div class="info-p">Daftar lokasi dan cara akses</div>
-        </div>
-        <div class="info-card" style="background:linear-gradient(135deg,#1E3A5F,#3B82F6)">
-          <div class="info-label">Regulasi</div>
-          <div class="info-h">Perpanjangan Visa Kerja 2027</div>
-          <div class="info-p">Prosedur dan syarat terbaru</div>
-        </div>
-      </div>
-
-      <!-- User card -->
-      <div class="usr-card">
-        <div class="usr-av">SN</div>
-        <div class="usr-info"><div class="usr-name">Siti Nurhaliza</div><div class="usr-sub">Kuala Lumpur &bull; Premium</div></div>
-        <span class="usr-badge">Aktif</span>
-      </div>
+      <div class="banner-dots" id="bdots"><span class="on"></span><span></span><span></span></div>
       <div style="height:24px"></div>
     </div>
 
@@ -426,25 +344,67 @@ body{display:flex;justify-content:center;align-items:center}
       <div class="pa-h">Mode Darurat Aktif</div>
       <div class="pa-p">Bantuan sedang dalam perjalanan.<br>Tetap tenang dan tunggu di tempat aman.</div>
       <div class="pa-list">
-        <div class="pa-row"><span class="pa-dot g"></span><div><div class="pa-rl">Lokasi GPS terkirim</div><div class="pa-rd">3.1390° N, 101.6869° E &bull; setiap 10 detik</div></div></div>
-        <div class="pa-row"><span class="pa-dot g"></span><div><div class="pa-rl">WhatsApp alert terkirim</div><div class="pa-rd">Kontak darurat & admin diberitahu</div></div></div>
+        <div class="pa-row"><span class="pa-dot g"></span><div><div class="pa-rl">Lokasi GPS terkirim</div><div class="pa-rd">3.1390° N, 101.6869° E</div></div></div>
+        <div class="pa-row"><span class="pa-dot g"></span><div><div class="pa-rl">WhatsApp alert terkirim</div><div class="pa-rd">Kontak darurat diberitahu</div></div></div>
         <div class="pa-row"><span class="pa-dot r"></span><div><div class="pa-rl">Rekaman audio aktif</div><div class="pa-rd">Merekam sebagai bukti</div></div></div>
       </div>
       <button class="pa-cancel" onclick="go('home')">Batalkan &mdash; Saya Aman</button>
     </div>
 
-    <!-- LAYANAN -->
+    <!-- LAYANAN (detail screens) -->
     <div class="scr lay off" id="s-layanan">
-      <div class="lay-head"><button class="back-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2>Layanan</h2></div>
+      <div class="lay-head"><button class="back-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2 id="lay-title">Layanan</h2></div>
       <div class="lay-body" id="lay-body"></div>
     </div>
 
-    <!-- BERITA -->
-    <div class="scr news off" id="s-berita">
-      <div class="news-head"><button class="back-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2>Berita</h2></div>
-      <div class="news-tabs">
-        <button class="ntab on">Semua</button><button class="ntab">Regulasi</button><button class="ntab">Kesehatan</button><button class="ntab">Keamanan</button><button class="ntab">Tips</button>
+    <!-- HOTLINE -->
+    <div class="scr lay off" id="s-hotline">
+      <div class="lay-head"><button class="back-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2>Kontak Penting</h2></div>
+      <div class="lay-body">
+        <div class="hotline-row" onclick="toast('Menghubungi KBRI...')">
+          <div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+          <div class="hotline-info"><div class="hotline-name">KBRI Kuala Lumpur</div><div class="hotline-num">+60 3-2116 4067 &bull; 24 jam</div></div>
+          <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        </div>
+        <div class="hotline-row" onclick="toast('Menghubungi Polisi...')">
+          <div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+          <div class="hotline-info"><div class="hotline-name">Polisi Malaysia</div><div class="hotline-num">999 &bull; Darurat</div></div>
+          <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        </div>
+        <div class="hotline-row" onclick="toast('Menghubungi Ambulans...')">
+          <div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg></div>
+          <div class="hotline-info"><div class="hotline-name">Ambulans Malaysia</div><div class="hotline-num">999 &bull; Medis</div></div>
+          <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        </div>
+        <div class="hotline-row" onclick="toast('Menghubungi BP2MI...')">
+          <div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+          <div class="hotline-info"><div class="hotline-name">BP2MI (BNP2TKI)</div><div class="hotline-num">+62 21-2960 4000</div></div>
+          <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        </div>
+        <div class="hotline-row" onclick="toast('Menghubungi...')">
+          <div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+          <div class="hotline-info"><div class="hotline-name">Imigresen Malaysia</div><div class="hotline-num">+60 3-8000 8000</div></div>
+          <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        </div>
       </div>
+    </div>
+
+    <!-- NOTIFIKASI -->
+    <div class="scr lay off" id="s-notifikasi">
+      <div class="lay-head"><button class="back-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2>Notifikasi</h2></div>
+      <div class="lay-body">
+        <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:0 0 10px">Hari Ini</div>
+        <div class="hotline-row" style="cursor:default"><div class="hotline-ico" style="background:var(--green-light)"><svg viewBox="0 0 24 24" fill="#059669"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><div class="hotline-info"><div class="hotline-name">Panic Button Aktif</div><div class="hotline-num">Fitur darurat Anda siap digunakan</div></div></div>
+        <div class="hotline-row" style="cursor:default"><div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/></svg></div><div class="hotline-info"><div class="hotline-name">Info Terbaru</div><div class="hotline-num">Aturan baru ketenagakerjaan Malaysia 2027</div></div></div>
+        <div class="hotline-row" style="cursor:default"><div class="hotline-ico" style="background:var(--blue-light)"><svg viewBox="0 0 24 24" fill="#1D4ED8"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><div class="hotline-info"><div class="hotline-name">Konsultasi Dijadwalkan</div><div class="hotline-num">Sesi konsultasi Anda besok pukul 10:00</div></div></div>
+        <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:16px 0 10px">Kemarin</div>
+        <div class="hotline-row" style="cursor:default"><div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></div><div class="hotline-info"><div class="hotline-name">Selamat Datang!</div><div class="hotline-num">Akun Anda berhasil diverifikasi</div></div></div>
+      </div>
+    </div>
+
+    <!-- INFORMASI -->
+    <div class="scr news off" id="s-informasi">
+      <div class="news-head"><button class="back-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2>Informasi</h2></div>
       <div class="news-list">
         <div class="news-item"><div class="news-img" style="background:linear-gradient(135deg,#1E3A5F,#3B82F6)"><svg width="24" height="24" fill="rgba(255,255,255,.3)" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/></svg></div><div class="news-info"><div class="news-cat">Regulasi</div><div class="news-h">Malaysia Perbarui Aturan Ketenagakerjaan untuk Pekerja Asing</div><div class="news-meta">20 Sep 2026 &bull; 5 min</div></div></div>
         <div class="news-item"><div class="news-img" style="background:linear-gradient(135deg,#065F46,#10B981)"><svg width="24" height="24" fill="rgba(255,255,255,.3)" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg></div><div class="news-info"><div class="news-cat">Kesehatan</div><div class="news-h">Daftar Klinik Gratis untuk TKI di Kuala Lumpur dan Selangor</div><div class="news-meta">18 Sep 2026 &bull; 3 min</div></div></div>
@@ -455,124 +415,255 @@ body{display:flex;justify-content:center;align-items:center}
 
     <!-- PROFIL -->
     <div class="scr prof off" id="s-profil">
-      <div class="prof-top"><div class="prof-top-head"><button class="back-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2>Profil</h2></div><div class="prof-top-center"><div class="prof-av">SN</div><div class="prof-name">Siti Nurhaliza</div><div class="prof-id">B1234567 &bull; TKI-2024-089234</div></div></div>
+      <div class="prof-top"><div class="prof-top-head"><button class="back-btn" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2>Profil</h2></div><div class="prof-top-center"><div class="prof-av">SN</div><div class="prof-name">Siti Nurhaliza</div><div class="prof-id">TKI-2024-089234</div></div></div>
       <div class="prof-body">
-        <div class="prof-sec">Data Pribadi</div>
+        <div class="prof-sec">Akun</div>
         <div class="prof-group">
-          <div class="prof-row" onclick="toast('Profil')"><div class="prof-row-ico" style="background:var(--blue-light)"><svg fill="#1D4ED8" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Profil Lengkap</div><div class="prof-row-v">Data diri, alamat, info majikan</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
-          <div class="prof-row" onclick="toast('Dokumen')"><div class="prof-row-ico" style="background:var(--purple-light)"><svg fill="#7C3AED" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Dokumen</div><div class="prof-row-v">KTP, Passport, Visa, Kontrak</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
-          <div class="prof-row" onclick="toast('Kontak')"><div class="prof-row-ico" style="background:var(--amber-light)"><svg fill="#D97706" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Kontak Darurat</div><div class="prof-row-v">Ahmad (Suami) +62 812-xxxx</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
-        </div>
-        <div class="prof-sec">Langganan</div>
-        <div class="prof-group">
-          <div class="prof-row"><div class="prof-row-ico" style="background:var(--green-light)"><svg fill="#059669" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Premium</div><div class="prof-row-v" style="color:#059669;font-weight:600">Aktif &bull; s/d 15 Mar 2027</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
-        </div>
-        <div class="prof-sec">Pengaturan</div>
-        <div class="prof-group">
-          <div class="prof-row"><div class="prof-row-ico" style="background:#F0FDFA"><svg fill="#0D9488" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Tracking Lokasi</div><div class="prof-row-v" style="color:#059669">Aktif &bull; setiap 30 menit</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
-          <div class="prof-row"><div class="prof-row-ico" style="background:var(--purple-light)"><svg fill="#7C3AED" viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Bahasa</div><div class="prof-row-v">Bahasa Indonesia</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
+          <div class="prof-row" onclick="goProf('lengkap')"><div class="prof-row-ico" style="background:#FDF2F2"><svg fill="#C41E24" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Profil Lengkap</div><div class="prof-row-v">Data diri, alamat, info majikan</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
+          <div class="prof-row" onclick="goProf('darurat')"><div class="prof-row-ico" style="background:#FDF2F2"><svg fill="#C41E24" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Kontak Darurat</div><div class="prof-row-v">3 kontak tersimpan</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
+          <div class="prof-row" onclick="goProf('produk')"><div class="prof-row-ico" style="background:#FDF2F2"><svg fill="#C41E24" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Produk dan Layanan Aktif</div><div class="prof-row-v">Panic Button, Asuransi, Konsultasi</div></div><span class="prof-row-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>
         </div>
         <button class="prof-out" onclick="toast('Logout')">Keluar</button>
         <div style="height:24px"></div>
       </div>
     </div>
+
+    <!-- PROFIL DETAIL -->
+    <div class="scr lay off" id="s-profdetail">
+      <div class="lay-head"><button class="back-btn" onclick="go('profil')"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2 id="profdetail-title">Detail</h2></div>
+      <div class="lay-body" id="profdetail-body"></div>
+    </div>
   </div>
 
-  <!-- 5-item bottom nav with center SOS -->
+  <!-- Bottom nav: Home | Hotline | SOS | Informasi | Profil -->
   <div class="bnav">
     <button class="ni on" id="n-home" onclick="go('home')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Home</button>
-    <button class="ni" id="n-layanan" onclick="go('layanan')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>Layanan</button>
+    <button class="ni" id="n-hotline" onclick="go('hotline')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Hotline</button>
     <button class="ni-sos" onclick="go('panic')"><div class="sos-circle"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div><span>SOS</span></button>
-    <button class="ni" id="n-berita" onclick="go('berita')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>Berita</button>
+    <button class="ni" id="n-informasi" onclick="go('informasi')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>Informasi</button>
     <button class="ni" id="n-profil" onclick="go('profil')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Profil</button>
   </div>
 
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal" id="modal-content"></div>
+  </div>
   <div class="toast" id="tst"></div>
 </div>
 
 <script>
-const D={
-  keamanan:{items:[
-    {n:'Panic Button',d:'Kirim sinyal darurat & lokasi GPS',c:'#FDF2F2',ic:'#C41E24',tag:'na'},
-    {n:'Tracking Lokasi',d:'Pemantauan lokasi oleh admin',c:'#FDF2F2',ic:'#C41E24',tag:'na'},
-    {n:'Riwayat Laporan',d:'Log aktivasi panic & kasus',c:'#FDF2F2',ic:'#C41E24',tag:'na'}
-  ]},
-  konsultasi:{items:[
-    {n:'Chat Konsultan',d:'Hubungi konsultan via WhatsApp',c:'#FDF2F2',ic:'#C41E24',tag:'wa'},
-    {n:'Daftar Konsultan',d:'Konsultan aktif & jam operasional',c:'#FDF2F2',ic:'#C41E24',tag:'na'},
-    {n:'Riwayat Konsultasi',d:'Log konsultasi sebelumnya',c:'#FDF2F2',ic:'#C41E24',tag:'na'}
-  ]},
-  hukum:{items:[
-    {n:'Form Pengaduan',d:'Lapor masalah hukum terstruktur',c:'#FDF2F2',ic:'#C41E24',tag:'na'},
-    {n:'Chat Advokat',d:'Hubungi advokat via WhatsApp',c:'#FDF2F2',ic:'#C41E24',tag:'wa'},
-    {n:'Info Hukum TKI',d:'Hak TKI & regulasi',c:'#FDF2F2',ic:'#C41E24',tag:'na'},
-    {n:'Status Kasus',d:'Tracking pengaduan hukum',c:'#FDF2F2',ic:'#C41E24',tag:'na'}
-  ]},
-  kesehatan:{items:[
-    {n:'Cari Klinik',d:'Klinik & RS terdekat di peta',c:'#FDF2F2',ic:'#C41E24',tag:'na'},
-    {n:'Booking Klinik',d:'Reservasi ke klinik partner',c:'#FDF2F2',ic:'#C41E24',tag:'wa'},
-    {n:'Riwayat Kesehatan',d:'Catatan kunjungan & resep',c:'#FDF2F2',ic:'#C41E24',tag:'na'},
-    {n:'Info Kesehatan',d:'Tips & fasilitas kesehatan',c:'#FDF2F2',ic:'#C41E24',tag:'na'}
-  ]}
-};
-const titles={keamanan:'Keamanan',konsultasi:'Konsultasi Online',hukum:'Bantuan Hukum',kesehatan:'Kesehatan'};
-const icons={na:'In-App',wa:'WhatsApp'};
-const svgs={
-  '#C41E24':'M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z',
-  '#0D9488':'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z',
-  '#1D4ED8':'M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z',
-  '#059669':'M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z',
-  '#D97706':'M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z',
-  '#7C3AED':'M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z'
-};
-
 let cur='home';
 const $=id=>document.getElementById(id);
 
 function go(s){
   if(s===cur)return;
-  const cls={home:'home',panic:'pa',layanan:'lay',berita:'news',profil:'prof'};
+  const cls={home:'home',panic:'pa',layanan:'lay',hotline:'lay',notifikasi:'lay',profdetail:'lay',informasi:'news',profil:'prof'};
   if($('s-'+cur))$('s-'+cur).className='scr '+cls[cur]+' back';
   cur=s;
   const el=$('s-'+s);
-  if(el){el.className='scr '+cls[s];el.scrollTop=0}
+  if(el){el.className='scr '+(cls[s]||'lay');el.scrollTop=0}
   document.querySelectorAll('.bnav .ni').forEach(b=>b.classList.remove('on'));
   const nb=$('n-'+s);if(nb)nb.classList.add('on');
-  if(s==='home'||s==='panic')$('n-home').classList.add('on');
+  if(s==='home'||s==='panic'||s==='layanan'||s==='notifikasi')$('n-home').classList.add('on');
+  if(s==='profil'||s==='profdetail')$('n-profil').classList.add('on');
   $('sb').className=s==='home'?'sb dark':'sb light';
 }
 
-function golay(k){
-  const d=D[k];
-  const body=$('lay-body');
-  body.innerHTML='<div class="lay-cat">'+titles[k]+'</div><div class="lay-list">'+d.items.map(i=>{
-    const p=svgs[i.ic]||svgs['#1D4ED8'];
-    return `<div class="lay-row" onclick="toast('${i.tag==='wa'?'Membuka WhatsApp...':i.n}')">
-      <div class="lay-row-ico" style="background:${i.c}"><svg viewBox="0 0 24 24" fill="${i.ic}"><path d="${p}"/></svg></div>
-      <div class="lay-row-info"><div class="lay-row-name">${i.n}</div><div class="lay-row-desc">${i.d}</div><span class="lay-row-tag ${i.tag}">${icons[i.tag]}</span></div>
-      <span class="lay-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>`;
-  }).join('')+'</div>';
-  go('layanan');
-}
+function showModal(html){$('modal-content').innerHTML=html;$('modal').classList.add('show')}
+function closeModal(e){if(e.target===$('modal'))$('modal').classList.remove('show')}
+function hideModal(){$('modal').classList.remove('show')}
 
-function showAllLay(){
+function goScreen(type){
   const body=$('lay-body');
-  let h='';
-  for(const k in D){
-    h+='<div class="lay-cat">'+titles[k]+'</div><div class="lay-list">'+D[k].items.map(i=>{
-      const p=svgs[i.ic]||svgs['#1D4ED8'];
-      return `<div class="lay-row" onclick="toast('${i.tag==='wa'?'Membuka WhatsApp...':i.n}')">
-        <div class="lay-row-ico" style="background:${i.c}"><svg viewBox="0 0 24 24" fill="${i.ic}"><path d="${p}"/></svg></div>
-        <div class="lay-row-info"><div class="lay-row-name">${i.n}</div><div class="lay-row-desc">${i.d}</div><span class="lay-row-tag ${i.tag}">${icons[i.tag]}</span></div>
-        <span class="lay-arr"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span></div>`;
-    }).join('')+'</div>';
+  const title=$('lay-title');
+  if(type==='konsultasi'){
+    title.textContent='Konsultasi Online';
+    body.innerHTML=`
+      <div style="text-align:center;padding:20px 0 16px">
+        <div style="width:72px;height:72px;border-radius:50%;background:#FDF2F2;margin:0 auto 12px;display:flex;align-items:center;justify-content:center">
+          <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+            <rect x="12" y="4" width="16" height="28" rx="3" fill="#FECACA"/>
+            <rect x="13" y="6" width="14" height="24" rx="2" fill="#C41E24"/>
+            <rect x="17" y="8" width="6" height="1" rx=".5" fill="rgba(255,255,255,.4)"/>
+            <circle cx="20" cy="27" r="1.5" fill="rgba(255,255,255,.5)"/>
+          </svg>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--text)">Hubungi Konsultan</div>
+        <div style="font-size:12px;color:var(--text2);margin-top:4px">Pilih metode konsultasi di bawah</div>
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:0 0 8px">Konsultan Tersedia</div>
+      <div style="background:var(--bg2);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
+        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800;flex-shrink:0">DR</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--text)">Dr. Rina Handayani</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Konsultan Hukum &amp; Ketenagakerjaan</div><div style="display:flex;align-items:center;gap:4px;margin-top:4px"><span style="width:6px;height:6px;border-radius:50%;background:#22C55E"></span><span style="font-size:10px;color:#22C55E;font-weight:600">Online</span></div></div>
+      </div>
+      <div class="hotline-row" onclick="showWaPopup('telepon')">
+        <div class="hotline-ico" style="background:#DCF8C6"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        <div class="hotline-info"><div class="hotline-name">Telepon via WhatsApp</div><div class="hotline-num">Panggilan suara ke konsultan</div></div>
+        <div class="hotline-call" style="background:#DCF8C6"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+      </div>
+      <div class="hotline-row" onclick="showWaPopup('chat')">
+        <div class="hotline-ico" style="background:#DCF8C6"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+        <div class="hotline-info"><div class="hotline-name">Chat via WhatsApp</div><div class="hotline-num">Kirim pesan teks ke konsultan</div></div>
+        <div class="hotline-call" style="background:#DCF8C6"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:12px;line-height:1.5">Layanan tersedia Senin-Jumat, 08:00-17:00 WIB<br>Diluar jam kerja, pesan akan dibalas di hari berikutnya.</div>`;
+  } else if(type==='hukum'){
+    title.textContent='Bantuan Hukum';
+    body.innerHTML=`
+      <div style="background:var(--blue-light);border-radius:12px;padding:12px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px">
+        <svg width="18" height="18" fill="#1D4ED8" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <div style="font-size:11px;color:#1D4ED8;line-height:1.5">Tim bantuan hukum akan merespons dalam waktu 1x24 jam. Untuk keadaan darurat, gunakan tombol SOS.</div>
+      </div>
+      <div class="form-group"><label class="form-label">Nama Lengkap</label><input class="form-input" id="f-nama" placeholder="Masukkan nama lengkap" value="Siti Nurhaliza"></div>
+      <div class="form-group"><label class="form-label">No. Telepon / WhatsApp</label><input class="form-input" id="f-telp" placeholder="+62 8xx-xxxx-xxxx" type="tel" value="+60 11-2345-6789"></div>
+      <div class="form-group"><label class="form-label">Kategori Masalah</label>
+        <select class="form-input" id="f-kat" style="appearance:auto"><option value="">— Pilih kategori —</option><option>Gaji tidak dibayar</option><option>Penyitaan dokumen</option><option selected>Pelanggaran kontrak kerja</option><option>Kekerasan / pelecehan</option><option>Deportasi / imigrasi</option><option>Lainnya</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Permasalahan / Deskripsi</label><textarea class="form-input" id="f-desc" placeholder="Ceritakan permasalahan hukum Anda secara detail...">Majikan tidak membayar gaji selama 2 bulan terakhir dan mengancam akan melaporkan saya ke imigrasi jika saya menuntut.</textarea></div>
+      <button class="form-btn" onclick="submitHukum()">Kirim Pengaduan</button>
+      <div class="form-note">Data Anda akan dirahasiakan dan hanya digunakan untuk penanganan kasus.</div>`;
+  } else if(type==='kesehatan'){
+    title.textContent='Kesehatan';
+    body.innerHTML=`
+      <div style="background:var(--bg2);border-radius:12px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <svg width="14" height="14" fill="var(--text3)" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span style="font-size:11px;color:var(--text2)">Lokasi: <strong style="color:var(--text)">Kuala Lumpur</strong></span>
+      </div>
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px">Klinik terdekat (6 ditemukan)</div>
+      <div class="clinic-card" onclick="goClinicForm('Tzu Chi Free Clinic','Lt. 5, 221 Jalan Pudu, 55100 KL','03-2142 2255','0.8 km')"><div class="clinic-name">Tzu Chi Free Clinic</div><div class="clinic-addr">Lt. 5, Wisma LTS, 221 Jalan Pudu, 55100 KL</div><div class="clinic-specs"><span class="clinic-spec">Umum</span><span class="clinic-spec">Gigi</span><span class="clinic-spec">Fisioterapi</span><span class="clinic-spec" style="background:var(--green-light);color:var(--green)">Gratis</span></div><div class="clinic-dist">0.8 km<span class="clinic-tag">Buka</span></div></div>
+      <div class="clinic-card" onclick="goClinicForm('Clinic Metromedic','Wisma Paradise, 63-1 Jalan Ampang, 50450 KL','03-2022 1259','1.5 km')"><div class="clinic-name">Clinic Metromedic — Masjid India</div><div class="clinic-addr">Wisma Paradise, 63-1 Jalan Ampang, 50450 KL</div><div class="clinic-specs"><span class="clinic-spec">Umum</span><span class="clinic-spec">FOMEMA</span><span class="clinic-spec">Rontgen</span><span class="clinic-spec">Lab</span></div><div class="clinic-dist">1.5 km<span class="clinic-tag">Buka</span></div></div>
+      <div class="clinic-card" onclick="goClinicForm('Klinik Kesihatan Cheras','Batu 4½, Jalan Cheras, 56100 KL','03-9130 4583','3.2 km')"><div class="clinic-name">Klinik Kesihatan Cheras</div><div class="clinic-addr">Batu 4½, Jalan Cheras, 56100 Kuala Lumpur</div><div class="clinic-specs"><span class="clinic-spec">Umum</span><span class="clinic-spec">Ibu &amp; Anak</span><span class="clinic-spec">Penyakit Kronis</span><span class="clinic-spec" style="background:var(--blue-light);color:var(--blue)">Pemerintah</span></div><div class="clinic-dist">3.2 km<span class="clinic-tag">Buka</span></div></div>
+      <div class="clinic-card" onclick="goClinicForm('Klinik Kesihatan Ampang','No. 6-3, Jalan Ampang Mewah, 68000 Ampang','03-4292 3332','4.1 km')"><div class="clinic-name">Klinik Kesihatan Ampang</div><div class="clinic-addr">No. 6-3, Jalan Ampang Mewah, 68000 Ampang</div><div class="clinic-specs"><span class="clinic-spec">Umum</span><span class="clinic-spec">Ibu &amp; Anak</span><span class="clinic-spec">Imunisasi</span><span class="clinic-spec" style="background:var(--blue-light);color:var(--blue)">Pemerintah</span></div><div class="clinic-dist">4.1 km<span class="clinic-tag">Buka</span></div></div>
+      <div class="clinic-card" onclick="goClinicForm('Klinik Pergigian Abdul &amp; Co','Lot 38G, Jalan Besar Ampang, Pekan Ampang','010-665 2455','4.5 km')"><div class="clinic-name">Klinik Pergigian Abdul &amp; Co</div><div class="clinic-addr">Lot 38G, Jalan Besar Ampang, Pekan Ampang</div><div class="clinic-specs"><span class="clinic-spec">Gigi</span><span class="clinic-spec">Scaling</span><span class="clinic-spec">Tambal</span><span class="clinic-spec">Cabut</span></div><div class="clinic-dist">4.5 km<span class="clinic-tag">Buka</span></div></div>
+      <div class="clinic-card" onclick="goClinicForm('Klinik Kesihatan Sentul','Tingkat 2, Kompleks Bandar Baru Sentul, 51100 KL','03-4042 7557','5.3 km')"><div class="clinic-name">Klinik Kesihatan Sentul</div><div class="clinic-addr">Tingkat 2, Kompleks Bandar Baru Sentul, 51100 KL</div><div class="clinic-specs"><span class="clinic-spec">Umum</span><span class="clinic-spec">Ibu &amp; Anak</span><span class="clinic-spec">Imunisasi</span><span class="clinic-spec" style="background:var(--blue-light);color:var(--blue)">Pemerintah</span></div><div class="clinic-dist">5.3 km<span class="clinic-tag" style="background:var(--amber-light);color:var(--amber)">Tutup 16:30</span></div></div>`;
   }
-  body.innerHTML=h;
   go('layanan');
 }
 
-document.querySelectorAll('.ntab').forEach(t=>t.onclick=function(){document.querySelectorAll('.ntab').forEach(x=>x.classList.remove('on'));this.classList.add('on')});
-document.getElementById('n-layanan').onclick=function(){showAllLay()};
+function showWaPopup(mode){
+  const isCall=mode==='telepon';
+  showModal(`
+    <div class="modal-icon wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
+    <div class="modal-h">${isCall?'Telepon WhatsApp':'Chat WhatsApp'}</div>
+    <div class="modal-p">Anda akan dialihkan ke WhatsApp untuk ${isCall?'menelepon':'chat dengan'} konsultan <strong>Dr. Rina Handayani</strong></div>
+    <div class="modal-ref">+60 12-345-6789</div>
+    <button class="modal-btn green" onclick="showWaConfirm('${mode}')">Buka WhatsApp</button>
+    <button class="modal-btn secondary" onclick="hideModal()">Batal</button>
+  `);
+}
+
+function showWaConfirm(mode){
+  const isCall=mode==='telepon';
+  showModal(`
+    <div class="modal-icon success"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+    <div class="modal-h">Dialihkan!</div>
+    <div class="modal-p">WhatsApp ${isCall?'call':'chat'} sedang dibuka. Konsultan akan ${isCall?'menerima panggilan Anda':'merespons pesan Anda dalam beberapa menit'}.</div>
+    <button class="modal-btn primary" onclick="hideModal()">Tutup</button>
+  `);
+}
+
+function submitHukum(){
+  showModal(`
+    <div class="modal-icon success"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+    <div class="modal-h">Pengaduan Terkirim!</div>
+    <div class="modal-p">Laporan Anda telah diterima. Tim bantuan hukum akan menghubungi Anda melalui WhatsApp dalam 1x24 jam.</div>
+    <div class="modal-ref">No. Tiket: HK-2026-00847</div>
+    <div style="font-size:11px;color:var(--text2);margin-bottom:16px;line-height:1.5">Simpan nomor tiket ini untuk referensi. Anda juga akan menerima konfirmasi via WhatsApp.</div>
+    <button class="modal-btn primary" onclick="hideModal();go('home')">Kembali ke Home</button>
+    <button class="modal-btn secondary" onclick="hideModal()">Tutup</button>
+  `);
+}
+
+function goClinicForm(name,addr,telp,dist){
+  const title=$('lay-title');
+  const body=$('lay-body');
+  title.textContent=name;
+  body.innerHTML=`
+    <div style="background:var(--bg2);border-radius:14px;padding:14px 16px;margin-bottom:16px">
+      <div style="font-size:14px;font-weight:700;color:var(--text)">${name}</div>
+      <div style="font-size:11px;color:var(--text2);margin-top:4px">${addr}</div>
+      <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
+        <span style="font-size:10px;font-weight:600;color:var(--green);display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;border-radius:50%;background:var(--green)"></span>${dist}</span>
+        <span style="font-size:10px;font-weight:600;color:var(--text2)">Tel: ${telp}</span>
+      </div>
+    </div>
+    <div class="hotline-row" onclick="showModal('<div class=\\'modal-icon wa\\'><svg viewBox=\\'0 0 24 24\\'><path d=\\'M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z\\'/></svg></div><div class=\\'modal-h\\'>Menghubungi Klinik</div><div class=\\'modal-p\\'>Menghubungi <strong>${name}</strong> di nomor ${telp}</div><button class=\\'modal-btn primary\\' onclick=\\'hideModal()\\'>Tutup</button>')">
+      <div class="hotline-ico" style="background:var(--green-light)"><svg viewBox="0 0 24 24" fill="#059669"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+      <div class="hotline-info"><div class="hotline-name">Hubungi Klinik</div><div class="hotline-num">${telp}</div></div>
+      <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+    </div>
+    <div style="font-size:13px;font-weight:700;color:var(--text);margin:16px 0 12px">Booking Kunjungan</div>
+    <div class="form-group"><label class="form-label">Nama Lengkap</label><input class="form-input" placeholder="Masukkan nama lengkap" value="Siti Nurhaliza"></div>
+    <div class="form-group"><label class="form-label">No. Telepon / WhatsApp</label><input class="form-input" placeholder="+62 8xx-xxxx-xxxx" type="tel" value="+60 11-2345-6789"></div>
+    <div class="form-group"><label class="form-label">Tanggal Kunjungan</label><input class="form-input" type="date" value="2026-09-23"></div>
+    <div class="form-group"><label class="form-label">Keluhan</label><textarea class="form-input" placeholder="Jelaskan keluhan kesehatan Anda..."></textarea></div>
+    <button class="form-btn" onclick="submitBooking('${name}')">Booking Kunjungan</button>
+    <div class="form-note">Anda akan menerima konfirmasi booking via WhatsApp.</div>`;
+}
+
+function submitBooking(clinic){
+  showModal(`
+    <div class="modal-icon success"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+    <div class="modal-h">Booking Berhasil!</div>
+    <div class="modal-p">Kunjungan Anda ke <strong>${clinic}</strong> telah dijadwalkan.</div>
+    <div class="modal-ref">23 September 2026</div>
+    <div style="font-size:11px;color:var(--text2);margin-bottom:16px;line-height:1.5">Konfirmasi akan dikirimkan via WhatsApp. Harap datang 15 menit sebelum jadwal.</div>
+    <button class="modal-btn primary" onclick="hideModal();go('home')">Kembali ke Home</button>
+    <button class="modal-btn secondary" onclick="hideModal()">Tutup</button>
+  `);
+}
+
+function goProf(type){
+  const body=$('profdetail-body');
+  const title=$('profdetail-title');
+  if(type==='lengkap'){
+    title.textContent='Profil Lengkap';
+    body.innerHTML=`
+      <div class="prof-group" style="margin-top:4px">
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Nama Lengkap</div><div class="prof-row-v">Siti Nurhaliza binti Abdullah</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">No. Paspor</div><div class="prof-row-v">A 1234567</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Tanggal Lahir</div><div class="prof-row-v">15 Januari 1992</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Jenis Kelamin</div><div class="prof-row-v">Perempuan</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">No. Telepon</div><div class="prof-row-v">+60 11-2345-6789</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Alamat Asal</div><div class="prof-row-v">Jl. Merdeka 45, Indramayu, Jawa Barat</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Alamat Malaysia</div><div class="prof-row-v">No. 12, Jalan Ampang, 50450 Kuala Lumpur</div></div></div>
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:16px 0 8px">Info Majikan</div>
+      <div class="prof-group">
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Nama Majikan</div><div class="prof-row-v">Tan Wei Ming</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Alamat Majikan</div><div class="prof-row-v">No. 12, Jalan Ampang, 50450 KL</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Jenis Pekerjaan</div><div class="prof-row-v">Pembantu Rumah Tangga</div></div></div>
+        <div class="prof-row"><div class="prof-row-info"><div class="prof-row-l">Masa Kontrak</div><div class="prof-row-v">1 Jan 2024 — 31 Des 2026</div></div></div>
+      </div>`;
+  } else if(type==='darurat'){
+    title.textContent='Kontak Darurat';
+    body.innerHTML=`
+      <div style="padding:4px 0 12px;font-size:13px;color:var(--text2)">Kontak yang akan dihubungi saat darurat</div>
+      <div class="hotline-row">
+        <div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        <div class="hotline-info"><div class="hotline-name">Ahmad bin Yusuf</div><div class="hotline-num">Suami &bull; +62 812-3456-7890</div></div>
+        <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+      </div>
+      <div class="hotline-row">
+        <div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        <div class="hotline-info"><div class="hotline-name">Ibu Sari</div><div class="hotline-num">Orang Tua &bull; +62 856-7890-1234</div></div>
+        <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+      </div>
+      <div class="hotline-row">
+        <div class="hotline-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        <div class="hotline-info"><div class="hotline-name">Dewi Lestari</div><div class="hotline-num">Teman &bull; +60 12-9876-5432</div></div>
+        <div class="hotline-call"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+      </div>`;
+  } else if(type==='produk'){
+    title.textContent='Produk dan Layanan Aktif';
+    body.innerHTML=`
+      <div class="prof-group" style="margin-top:4px">
+        <div class="prof-row"><div class="prof-row-ico" style="background:#FDF2F2"><svg fill="#C41E24" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Panic Button</div><div class="prod-active">Aktif &bull; Gratis selamanya</div><div style="font-size:11px;color:var(--text3);margin-top:4px">Tombol darurat SOS yang mengirimkan lokasi GPS dan notifikasi ke kontak darurat secara otomatis.</div></div></div>
+        <div class="prof-row"><div class="prof-row-ico" style="background:#FDF2F2"><svg fill="#C41E24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Asuransi Ketenagakerjaan</div><div class="prod-active">Aktif &bull; s/d 15 Mar 2027</div><div style="font-size:11px;color:var(--text3);margin-top:4px">Polis: INS-2024-00456<br>Premi: Rp 300.000/tahun<br>Perlindungan kecelakaan kerja dan kesehatan dasar.</div></div></div>
+        <div class="prof-row"><div class="prof-row-ico" style="background:#FDF2F2"><svg fill="#C41E24" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><div class="prof-row-info"><div class="prof-row-l">Layanan Konsultasi Online</div><div class="prod-active">Aktif &bull; s/d 15 Mar 2027</div><div style="font-size:11px;color:var(--text3);margin-top:4px">Konsultasi hukum dan umum via telepon dan chat WhatsApp dengan konsultan berpengalaman.</div></div></div>
+      </div>`;
+  }
+  go('profdetail');
+}
 
 function toast(m){const t=$('tst');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(12px)'},2e3)}
 
