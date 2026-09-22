@@ -23,15 +23,15 @@ body{display:flex;justify-content:center;align-items:center}
 .scr.back{transform:translateX(-15%);opacity:0;pointer-events:none;overflow:hidden}
 
 /* BOTTOM NAV — smaller, SOS bigger */
-.bnav{display:flex;align-items:flex-end;background:var(--bg);border-top:1px solid var(--divider);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0);position:relative;height:48px}
-.bnav .ni{flex:1;background:none;border:none;color:var(--text3);font-family:inherit;font-size:8px;font-weight:600;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;transition:color .15s;height:100%}
+.bnav{display:flex;align-items:flex-end;background:var(--bg);border-top:1px solid var(--divider);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0);position:relative;height:72px}
+.bnav .ni{flex:1;background:none;border:none;color:var(--text3);font-family:inherit;font-size:10px;font-weight:600;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:color .15s;height:100%}
 .bnav .ni.on{color:var(--red)}
-.bnav .ni svg{width:18px;height:18px}
-.bnav .ni-sos{flex:1;display:flex;flex-direction:column;align-items:center;background:none;border:none;cursor:pointer;padding:0;font-family:inherit;position:relative;top:-12px;gap:0}
-.bnav .ni-sos .sos-circle{width:62px;height:62px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px var(--red-glow);transition:transform .1s;border:3px solid var(--bg)}
+.bnav .ni svg{width:26px;height:26px}
+.bnav .ni-sos{flex:1;display:flex;flex-direction:column;align-items:center;background:none;border:none;cursor:pointer;padding:0;font-family:inherit;position:relative;top:-20px;gap:0}
+.bnav .ni-sos .sos-circle{width:86px;height:86px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px var(--red-glow);transition:transform .1s;border:4px solid var(--bg)}
 .bnav .ni-sos:active .sos-circle{transform:scale(.9)}
-.bnav .ni-sos .sos-circle svg{width:28px;height:28px;fill:#fff}
-.bnav .ni-sos span{font-size:8px;font-weight:700;color:var(--red);margin-top:2px}
+.bnav .ni-sos .sos-circle svg{width:39px;height:39px;fill:#fff}
+.bnav .ni-sos span{font-size:10px;font-weight:700;color:var(--red);margin-top:4px}
 
 /* HOME */
 .home{background:var(--bg);position:relative}
