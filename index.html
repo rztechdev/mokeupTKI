@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>TKI Protect</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
@@ -209,6 +214,8 @@ textarea.form-input{min-height:100px;resize:vertical}
 .modal-btn.green{background:#25D366;color:#fff;margin-bottom:8px}
 .modal-btn.secondary{background:var(--bg2);color:var(--text)}
 </style>
+</head>
+<body>
 
 <div class="app">
   <div class="sb dark" id="sb"><span>09:41</span><span class="sb-r">5G &bull; 87%</span></div>
@@ -463,9 +470,11 @@ function go(s){
   if(el){el.className='scr '+(cls[s]||'lay');el.scrollTop=0}
   document.querySelectorAll('.bnav .ni').forEach(b=>b.classList.remove('on'));
   const nb=$('n-'+s);if(nb)nb.classList.add('on');
-  if(s==='home'||s==='panic'||s==='layanan'||s==='notifikasi')$('n-home').classList.add('on');
-  if(s==='profil'||s==='profdetail')$('n-profil').classList.add('on');
+  if(s==='home'||s==='panic')$('n-home').classList.add('on');
+  if(s==='profil')$('n-profil').classList.add('on');
   $('sb').className=s==='home'?'sb dark':'sb light';
+  const noNav=['layanan','notifikasi','profdetail'];
+  document.querySelector('.bnav').style.display=noNav.includes(s)?'none':'flex';
 }
 
 function showModal(html){$('modal-content').innerHTML=html;$('modal').classList.add('show')}
@@ -675,3 +684,5 @@ const bw=$('bwrap');let bsx=0;
 bw.addEventListener('touchstart',e=>{bsx=e.touches[0].clientX;clearInterval(bInt)},{passive:true});
 bw.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-bsx;if(Math.abs(dx)>40){if(dx<0&&bIdx<bTotal-1)bGo(bIdx+1);else if(dx>0&&bIdx>0)bGo(bIdx-1)}bInt=setInterval(()=>bGo((bIdx+1)%bTotal),4000)},{passive:true});
 </script>
+</body>
+</html>
