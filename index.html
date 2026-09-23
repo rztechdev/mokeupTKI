@@ -470,10 +470,10 @@ function go(s){
   if(el){el.className='scr '+(cls[s]||'lay');el.scrollTop=0}
   document.querySelectorAll('.bnav .ni').forEach(b=>b.classList.remove('on'));
   const nb=$('n-'+s);if(nb)nb.classList.add('on');
-  if(s==='home'||s==='panic')$('n-home').classList.add('on');
+  if(s==='home')$('n-home').classList.add('on');
   if(s==='profil')$('n-profil').classList.add('on');
   $('sb').className=s==='home'?'sb dark':'sb light';
-  const noNav=['layanan','notifikasi','profdetail'];
+  const noNav=['panic','layanan','notifikasi','profdetail'];
   document.querySelector('.bnav').style.display=noNav.includes(s)?'none':'flex';
 }
 
